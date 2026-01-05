@@ -4,108 +4,946 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YGA Gönüllü İlgi Alanları Testi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+            min-height: 100vh;
         }
-        .fade-in {
+        
+        .container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            max-width: 48rem;
+            width: 100%;
+            padding: 3rem;
             animation: fadeIn 0.3s ease-in;
         }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        .logo {
+            width: 5rem;
+            height: 5rem;
+            background: linear-gradient(to bottom right, #3b82f6, #9333ea);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 1.875rem;
+            font-weight: bold;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+        
+        .info-box {
+            background: linear-gradient(to bottom right, #dbeafe, #e9d5ff);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        
+        .info-list {
+            list-style: none;
+        }
+        
+        .info-item {
+            display: flex;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+        
+        .check-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #2563eb;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .stat {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .stat-badge {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .stat-badge.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+        
+        .stat-badge.purple {
+            background: #e9d5ff;
+            color: #9333ea;
+        }
+        
+        .btn {
+            width: 100%;
+            background: linear-gradient(to right, #2563eb, #9333ea);
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 600;
+            padding: 1rem;
+            border-radius: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #1d4ed8, #7e22ce);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .progress-info .left {
+            color: #6b7280;
+        }
+        
+        .progress-info .right {
+            color: #2563eb;
+        }
+        
+        .progress-bar-bg {
+            width: 100%;
+            height: 0.5rem;
+            background: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        
         .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #2563eb, #9333ea);
             transition: width 0.3s ease-in-out;
+        }
+        
+        .question-text {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .option {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 2px solid #e5e7eb;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .option:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background: #f9fafb;
+        }
+        
+        .option.selected {
+            border-color: #2563eb;
+            background: #dbeafe;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option-radio {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 2px solid #d1d5db;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .option:hover .option-radio {
+            border-color: #3b82f6;
+        }
+        
+        .option.selected .option-radio {
+            border-color: #2563eb;
+            background: #2563eb;
+        }
+        
+        .option-radio-inner {
+            width: 0.5rem;
+            height: 0.5rem;
+            background: white;
+            border-radius: 50%;
+            display: none;
+        }
+        
+        .option.selected .option-radio-inner {
+            display: block;
+        }
+        
+        .option-text {
+            font-size: 1.125rem;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+        
+        .back-btn {
+            color: #6b7280;
+            background: none;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        
+        .back-btn:hover {
+            color: #111827;
+        }
+        
+        .ranking-container {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .ranking-container:last-child {
+            border-bottom: none;
+        }
+        
+        .ranking-question {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ranking-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .ranking-option {
+            background: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+        }
+        
+        .ranking-option-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .ranking-option-text {
+            color: #1f2937;
+            flex: 1;
+            padding-right: 1rem;
+        }
+        
+        .ranking-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .rank-btn {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            border: 2px solid #d1d5db;
+            background: white;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .rank-btn:hover {
+            border-color: #9333ea;
+            color: #9333ea;
+        }
+        
+        .rank-btn.selected {
+            background: linear-gradient(to bottom right, #9333ea, #ec4899);
+            border-color: #9333ea;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .results-icon {
+            width: 6rem;
+            height: 6rem;
+            background: linear-gradient(to bottom right, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .score-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+        
+        .score-item {
+            margin-bottom: 1rem;
+        }
+        
+        .score-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .score-label {
+            font-weight: 600;
+            color: #111827;
+            font-size: 1.125rem;
+        }
+        
+        .score-desc {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-left: 0.75rem;
+        }
+        
+        .score-percentage {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #111827;
+        }
+        
+        .score-bar-bg {
+            width: 100%;
+            height: 1rem;
+            background: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        
+        .score-bar {
+            height: 100%;
+            background: linear-gradient(to right, #2563eb, #9333ea);
+            transition: width 1s ease-in-out;
+        }
+        
+        .profile-box {
+            background: linear-gradient(to bottom right, #dbeafe, #e9d5ff);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .profile-badge {
+            display: inline-block;
+            background: linear-gradient(to right, #2563eb, #9333ea);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .profile-subtitle {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .top-scores {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .top-score-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .top-score-rank {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.25rem;
+        }
+        
+        .top-score-type {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+        }
+        
+        .top-score-percent {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .roles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .role-card {
+            background: linear-gradient(to right, white, #f9fafb);
+            border: 2px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .role-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .role-number {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(to bottom right, #2563eb, #9333ea);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .role-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+        
+        .role-desc {
+            color: #6b7280;
+        }
+        
+        .next-steps {
+            background: linear-gradient(to bottom right, #d1fae5, #a7f3d0);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+        
+        .next-steps-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .next-step {
+            display: flex;
+            margin-bottom: 0.75rem;
+            color: #374151;
+            font-size: 1.125rem;
+        }
+        
+        .arrow-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #059669;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+        
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                padding: 2rem 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.875rem;
+            }
+            
+            .question-text {
+                font-size: 1.5rem;
+            }
+            
+            .top-scores {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen">
+<body>
     <div id="app"></div>
+    
     <script>
-        const forcedChoiceQuestions = [
-            {q:"Bir YGA etkinliğinde hangi rolü almak daha çok zevk verir?",options:[{text:"Sahne düzenini kurmak ve teknik ekipmanları ayarlamak",type:"R"},{text:"Katılımcılarla sohbet edip onları rahat ettirmek",type:"S"},{text:"Etkinlik programını detaylı şekilde planlamak",type:"C"}]},
-            {q:"Boş bir cumartesi günün var. Ne yapmayı tercih edersin?",options:[{text:"Yeni bir araştırma makalesini okumak veya belgesel izlemek",type:"I"},{text:"Arkadaşlarınla bir şeyler organize etmek",type:"E"},{text:"Bir hobi projesinde yaratıcı bir şey üretmek",type:"A"}]},
-            {q:"Bir bilim sahasında çocuklar ilgisiz görünüyor. Ne yaparsın?",options:[{text:"Deneyi daha görsel ve eğlenceli hale getiririm",type:"A"},{text:"Çocuklarla birebir konuşup ne merak ettiklerini anlamaya çalışırım",type:"S"},{text:"Deneyin bilimsel mantığını farklı şekilde açıklarım",type:"I"}]},
-            {q:"YGA'da yeni bir proje başlatılacak. Hangi kısmında yer almak istersin?",options:[{text:"Projenin nasıl çalışacağını analiz edip araştırma yapmak",type:"I"},{text:"Projeyi paydaşlara sunmak ve destek toplamak",type:"E"},{text:"Proje dosyalarını düzenlemek ve takibi yapmak",type:"C"}]},
-            {q:"Hangi tür görevlerde kendini daha enerjik hissedersin?",options:[{text:"Fiziksel bir şey yapmak (kurulum, düzenleme, taşıma)",type:"R"},{text:"İnsanlarla konuşmak, dinlemek, yardım etmek",type:"S"},{text:"Yaratıcı içerik üretmek (yazı, görsel, video)",type:"A"}]},
-            {q:"Twin bilim setleriyle ilgili bir görev var. Hangisini seçersin?",options:[{text:"Setleri kurmak ve çocuklara nasıl kullanılacağını göstermek",type:"R"},{text:"Setlerle yapılabilecek yeni deneyler araştırmak",type:"I"},{text:"Setlerin envanter takibini ve lojistiğini yönetmek",type:"C"}]},
-            {q:"Bir webinar hazırlığı yapılıyor. Hangi görevi tercih edersin?",options:[{text:"Konuşmacıların sunumlarını tasarlamak",type:"A"},{text:"Katılımcı kayıtlarını organize etmek ve hatırlatmalar göndermek",type:"C"},{text:"Webinar akışını yönetmek ve ekibi koordine etmek",type:"E"}]},
-            {q:"Hangi durumda daha mutlu olursun?",options:[{text:"Karmaşık bir problemi çözdüğünde",type:"I"},{text:"Birine yardım edip onu mutlu ettiğinde",type:"S"},{text:"Orijinal bir fikir üretip hayata geçirdiğinde",type:"A"}]},
-            {q:"YGA için yurt dışı bir toplantıya gidiyorsun. Neler yaparsın?",options:[{text:"Sunumları hazırlamak ve temsil etmek",type:"E"},{text:"Toplantı notlarını tutmak ve raporlamak",type:"C"},{text:"Oradaki insanlarla tanışmak ve ilişki kurmak",type:"S"}]},
-            {q:"Bilim Seferberliği için yeni bir lokasyon araştırması yapılıyor. Hangisinde yer alırsın?",options:[{text:"Verileri analiz edip en uygun yeri bulmak",type:"I"},{text:"Yerel paydaşlarla görüşmeler yapmak",type:"E"},{text:"Lojistik planlamayı ve bütçeyi hesaplamak",type:"C"}]},
-            {q:"Bir kampda hangi aktivitede olmak daha zevkli?",options:[{text:"Gece ateş başında hikaye anlatmak veya oyun yönetmek",type:"A"},{text:"Yeni katılanlarla tanışıp onlara rehberlik etmek",type:"S"},{text:"Kampın günlük programını organize etmek",type:"C"}]},
-            {q:"Aşağıdaki çalışma ortamlarından hangisinde daha verimli olursun?",options:[{text:"Atölyede, makerspace'te, fiziksel şeyler üzerinde çalışırken",type:"R"},{text:"İnsanlarla dolu bir ortamda, sürekli etkileşimde",type:"S"},{text:"Sessiz bir yerde, düşünüp araştırma yaparken",type:"I"}]},
-            {q:"Twin uygulaması için yeni bir özellik geliştiriliyor. Hangi kısmında olmak istersin?",options:[{text:"Kullanıcı deneyimini (UX) tasarlamak",type:"A"},{text:"Teknik altyapıyı kodlamak",type:"I"},{text:"Kullanıcı testleri yapıp feedback toplamak",type:"S"}]},
-            {q:"Zirve hazırlığında hangi görevi tercih edersin?",options:[{text:"Sahne tasarımını ve dekorasyonu yapmak",type:"A"},{text:"Katılımcı deneyimini planlamak ve akışı yönetmek",type:"E"},{text:"Kayıtları ve katılımcı listelerini yönetmek",type:"C"}]},
-            {q:"Yeni bir gönüllüyle çalışıyorsun. Nasıl yaklaşırsın?",options:[{text:"Ona görevlerini net şekilde açıklarım ve takip ederim",type:"C"},{text:"Onunla oturup tanışırım, neye ihtiyacı var dinlerim",type:"S"},{text:"Ona zorlayıcı bir görev verip öğrenmesini izlerim",type:"E"}]},
-            {q:"Hangi başarı seni daha çok tatmin eder?",options:[{text:"Bir şeyi baştan sona kendin ürettiğinde",type:"R"},{text:"Bir sorunu analiz edip çözüm bulduğunda",type:"I"},{text:"Bir ekibi başarıya taşıdığında",type:"E"}]},
-            {q:"Content ekibi için yeni bir video çekiliyor. Nerede olmak istersin?",options:[{text:"Kamera ve ışık ayarlarını yapmak",type:"R"},{text:"Senaryo ve konsept geliştirmek",type:"A"},{text:"Çekimleri organize edip ekibi yönetmek",type:"E"}]},
-            {q:"Global Expansion için bir sunum hazırlanıyor. Hangisini yaparsın?",options:[{text:"Verileri araştırıp stratejik analiz yapmak",type:"I"},{text:"Sunumu görsel ve çekici hale getirmek",type:"A"},{text:"Sunumu yapmak ve paydaşları ikna etmek",type:"E"}]},
-            {q:"Bir bilim sahasında teknik bir sorun oluştu. Ne yaparsın?",options:[{text:"Sorunu hemen kendim çözmeye çalışırım",type:"R"},{text:"Ekiple birlikte beyin fırtınası yaparım",type:"S"},{text:"Problemi sistematik şekilde analiz edip çözüm ararım",type:"I"}]},
-            {q:"YGA'nın sosyal medya içerikleri için ne yapmak istersin?",options:[{text:"Görseller ve videolar tasarlamak",type:"A"},{text:"Analitikleri takip edip strateji geliştirmek",type:"I"},{text:"Takipçilerle etkileşime geçmek ve community yönetmek",type:"S"}]},
-            {q:"Sustainability projeleri için hangi rolde olmak istersin?",options:[{text:"Çevresel etki analizi yapmak",type:"I"},{text:"Paydaşlarla iş birlikleri kurmak",type:"E"},{text:"Projelerin düzenli raporlamasını yapmak",type:"C"}]},
-            {q:"Hangi tür toplantılarda daha aktif ve enerjik olursun?",options:[{text:"Beyin fırtınası ve yaratıcı çalışma toplantıları",type:"A"},{text:"Stratejik planlama ve karar alma toplantıları",type:"E"},{text:"Detaylı veri analizi ve raporlama toplantıları",type:"I"}]},
-            {q:"Program Development için yeni bir kamp tasarlanıyor. Nerede katkı sağlarsın?",options:[{text:"Kampın eğitim içeriğini araştırmak",type:"I"},{text:"Kampın interaktif aktivitelerini tasarlamak",type:"A"},{text:"Kampın lojistiğini ve timeline'ını planlamak",type:"C"}]},
-            {q:"People & Culture ekibinde hangi görevi tercih edersin?",options:[{text:"Gönüllülerle 1:1 görüşmeler yapıp onları dinlemek",type:"S"},{text:"Engagement anketleri ve veri analizi",type:"I"},{text:"Onboarding süreçlerini sistematize etmek",type:"C"}]},
-            {q:"Bir çocuk sahada 'Ben bunu yapamam' diyor. Ne yaparsın?",options:[{text:"Ona adım adım gösteririm, beraber yaparız",type:"S"},{text:"Onu farklı bir yaklaşım denemeye teşvik ederim",type:"A"},{text:"Ona neden yapabileceğini mantıksal olarak açıklarım",type:"I"}]},
-            {q:"GSC (Global Sustainability Challenge) için ne yapmak istersin?",options:[{text:"Katılımcı ekiplere mentoring yapmak",type:"S"},{text:"Yarışmanın organizasyonunu ve jüri sürecini yönetmek",type:"E"},{text:"Projlerin teknik kalitesini değerlendirmek",type:"I"}]},
-            {q:"Satış ekibinde hangi rolü tercih edersin?",options:[{text:"Potansiyel müşterilerle görüşmeler yapmak",type:"E"},{text:"Satış verilerini analiz edip strateji geliştirmek",type:"I"},{text:"CRM sistemini düzenlemek ve takip yapmak",type:"C"}]},
-            {q:"Twin AI Companion için hangi kısımda çalışmak istersin?",options:[{text:"Algoritma ve makine öğrenmesi geliştirmek",type:"I"},{text:"Kullanıcı arayüzünü tasarlamak",type:"A"},{text:"Kullanıcı testleri yapıp feedback toplamak",type:"S"}]},
-            {q:"Bir proje başarısız oldu. Nasıl tepki verirsin?",options:[{text:"Neyin yanlış gittiğini analiz ederim",type:"I"},{text:"Ekibin moralini yüksek tutmaya çalışırım",type:"S"},{text:"Hemen yeni bir plan yapar, harekete geçerim",type:"E"}]},
-            {q:"Technology ekibinde hangi rolü tercih edersin?",options:[{text:"Backend development ve database yönetimi",type:"I"},{text:"Frontend development ve görsel tasarım",type:"A"},{text:"Bug fixing ve sistem bakımı",type:"R"}]},
-            {q:"Ruanda Eğitim Bakanlığı ile görüşme var. Hazırlıkta nasıl katkı sağlarsın?",options:[{text:"Sunum materyallerini hazırlamak",type:"A"},{text:"Görüşmeyi yönetmek ve müzakere etmek",type:"E"},{text:"Arka planda veri ve raporlar hazırlamak",type:"I"}]},
-            {q:"Spokes bisiklet projesi için hangi görevi tercih edersin?",options:[{text:"Rota planlaması ve lojistik",type:"C"},{text:"Yol boyunca çocuklarla etkileşim",type:"S"},{text:"Projenin hikayesini anlatmak ve belgelemek",type:"A"}]},
-            {q:"Gönüllendirin (Marketing) ekibinde ne yapmak istersin?",options:[{text:"Kampanya stratejileri geliştirmek",type:"E"},{text:"Yaratıcı içerikler üretmek",type:"A"},{text:"Kampanya metriklerini takip etmek",type:"C"}]},
-            {q:"Bir çocuk bir deneyde beklenmedik bir sonuç buldu. Ne yaparsın?",options:[{text:"'Vay! Bunu neden oldu acaba? Araştıralım!' derim",type:"I"},{text:"'Harika bir keşif yaptın!' diyerek onu kutlarım",type:"S"},{text:"'Farklı bir şey deneyelim belki daha ilginç olur' derim",type:"A"}]},
-            {q:"Twin Digital Library için hangi kısımda çalışmak istersin?",options:[{text:"İçerik kataloglaması ve organizasyonu",type:"C"},{text:"Yeni eğitim materyalleri geliştirmek",type:"I"},{text:"Kullanıcı engagement stratejileri",type:"E"}]},
-            {q:"Bilim Seferberliği'nin etkisini nasıl ölçmek istersin?",options:[{text:"Veri toplama ve istatistiksel analiz",type:"I"},{text:"Çocuklarla röportajlar yapma",type:"S"},{text:"Raporlama ve görselleştirme",type:"A"}]},
-            {q:"Yeni bir gönüllü kampa geldi ve kaybolmuş görünüyor. Ne yaparsın?",options:[{text:"Ona yaklaşır, kendimi tanıtır, yardım teklif ederim",type:"S"},{text:"Ona kampın haritasını ve programını detaylı açıklarım",type:"C"},{text:"Onu gruba dahil eder, tanışmasını sağlarım",type:"E"}]},
-            {q:"Product ekibinde hangi görevi tercih edersin?",options:[{text:"Kullanıcı ihtiyaçlarını araştırmak",type:"I"},{text:"Product roadmap ve prioritization",type:"E"},{text:"Feature testleri ve QA",type:"C"}]},
-            {q:"Hangi tür görevlerde zaman nasıl geçtiğini anlamazsın?",options:[{text:"Bir şeyleri tamir ederken veya monte ederken",type:"R"},{text:"Araştırma yaparken veya veri analiz ederken",type:"I"},{text:"Yaratıcı çalışırken (yazarken, tasarlarken)",type:"A"}]},
-            {q:"Program Development'ta hangi kısma odaklanırsın?",options:[{text:"Gönüllü deneyimini iyileştirmek",type:"S"},{text:"Program etkisini ölçümlemek",type:"I"},{text:"Süreçleri optimize etmek",type:"C"}]},
-            {q:"Bir toplantıda hangi rol sana daha doğal gelir?",options:[{text:"Not alan, görevleri takip eden",type:"C"},{text:"Yaratıcı fikirler öneren",type:"A"},{text:"Toplantıyı yöneten, kararları organize eden",type:"E"}]},
-            {q:"Content üretimi için hangi formatı tercih edersin?",options:[{text:"Yazılı içerik (blog, makale)",type:"I"},{text:"Video içerik (çekim, kurgu)",type:"A"},{text:"İnfografik ve data visualization",type:"A"}]},
-            {q:"Global Expansion için yeni bir ülke araştırması yapılıyor. Nasıl katkı sağlarsın?",options:[{text:"Ülkenin eğitim sistemini analiz etmek",type:"I"},{text:"Yerel ortaklarla networking yapmak",type:"E"},{text:"Feasibility raporunu hazırlamak",type:"C"}]},
-            {q:"Bir çocuğun ailesi sahaya geldi ve YGA'yı merak ediyor. Ne yaparsın?",options:[{text:"Onlarla sıcak bir şekilde sohbet eder, YGA'yı anlatırım",type:"S"},{text:"Onlara YGA'nın etki raporlarını ve verilerini gösteririm",type:"I"},{text:"Onları bir bilim deneyi yapmaya davet ederim",type:"R"}]},
-            {q:"Technology stack kararı alınıyor. Hangi yaklaşımı tercih edersin?",options:[{text:"En yeni teknolojileri araştırıp denerim",type:"I"},{text:"Ekiple konuşur, ihtiyaçları dinlerim",type:"S"},{text:"Mevcut sistemlerle uyumlu, stabil olanı seçerim",type:"C"}]},
-            {q:"Sustainability projelerinde hangi kısım seni daha çok heyecanlandırır?",options:[{text:"Carbon footprint hesaplama ve analiz",type:"I"},{text:"Yeşil kampanyalar tasarlama",type:"A"},{text:"Paydaşlarla sürdürülebilirlik anlaşmaları yapmak",type:"E"}]},
-            {q:"People & Culture için yeni bir initiative başlatılıyor. Hangisini tercih edersin?",options:[{text:"Mentoring programı tasarlamak",type:"S"},{text:"Gönüllü gelişim framework'ü oluşturmak",type:"I"},{text:"Team building aktiviteleri organize etmek",type:"E"}]},
-            {q:"Bilim Seferberliği için yeni bir deney seti geliştiriliyor. Nerede olmak istersin?",options:[{text:"Deneyin bilimsel içeriğini tasarlamak",type:"I"},{text:"Fiziksel materyalleri kurmak ve test etmek",type:"R"},{text:"Deneyin anlaşılır şekilde çocuklara anlatılmasını sağlamak",type:"S"}]},
-            {q:"GSC için sponsorluk görüşmeleri yapılıyor. Hangi rolü tercih edersin?",options:[{text:"Sponsorluk paketlerini hazırlamak",type:"C"},{text:"Sponsorlarla görüşmeler yapmak",type:"E"},{text:"Sponsorluk etkisini ölçümlemek",type:"I"}]},
-            {q:"Hangi tür çalışma seni daha çok motive eder?",options:[{text:"Uzun vadeli, stratejik projeler",type:"I"},{text:"Hızlı, dinamik, kısa döngülü işler",type:"R"},{text:"Düzenli, öngörülebilir, sistemli işler",type:"C"}]},
-            {q:"Satış ekibi için yeni bir pitch hazırlanıyor. Nasıl katkı sağlarsın?",options:[{text:"Pitch storyline ve messaging",type:"E"},{text:"Müşteri segmentasyonu ve analiz",type:"I"},{text:"Pitch deck tasarımı",type:"A"}]},
-            {q:"Twin AI Companion'da bir bug var. Nasıl yaklaşırsın?",options:[{text:"Hemen kodu inceleyip düzeltmeye çalışırım",type:"I"},{text:"Bug'ın kullanıcıları nasıl etkilediğini anlarım",type:"S"},{text:"Bug tracking sistemine kaydeder, prioritize ederim",type:"C"}]},
-            {q:"Gönüllendirin kampanyası için yeni bir strateji gerekiyor. Ne yaparsın?",options:[{text:"Geçmiş verileri analiz edip insight çıkarırım",type:"I"},{text:"Yaratıcı bir kampanya konsepti tasarlarım",type:"A"},{text:"Kampanyayı adım adım planlarım",type:"C"}]},
-            {q:"Bir projede ekip içinde fikir ayrılığı var. Ne yaparsın?",options:[{text:"Herkesin görüşünü dinler, ortak zemini ararım",type:"S"},{text:"Verilere bakar, en mantıklı çözümü bulurum",type:"I"},{text:"Karar alır, ekibi yönlendiririm",type:"E"}]}
+        // Veri
+        const questions = [
+            {q:"Bir YGA etkinliğinde hangi rolü almak daha çok zevk verir?",options:[{t:"Sahne düzenini kurmak ve teknik ekipmanları ayarlamak",type:"R"},{t:"Katılımcılarla sohbet edip onları rahat ettirmek",type:"S"},{t:"Etkinlik programını detaylı şekilde planlamak",type:"C"}]},
+            {q:"Boş bir cumartesi günün var. Ne yapmayı tercih edersin?",options:[{t:"Yeni bir araştırma makalesini okumak veya belgesel izlemek",type:"I"},{t:"Arkadaşlarınla bir şeyler organize etmek",type:"E"},{t:"Bir hobi projesinde yaratıcı bir şey üretmek",type:"A"}]},
+            {q:"Bir bilim sahasında çocuklar ilgisiz görünüyor. Ne yaparsın?",options:[{t:"Deneyi daha görsel ve eğlenceli hale getiririm",type:"A"},{t:"Çocuklarla birebir konuşup ne merak ettiklerini anlamaya çalışırım",type:"S"},{t:"Deneyin bilimsel mantığını farklı şekilde açıklarım",type:"I"}]},
+            {q:"YGA'da yeni bir proje başlatılacak. Hangi kısmında yer almak istersin?",options:[{t:"Projenin nasıl çalışacağını analiz edip araştırma yapmak",type:"I"},{t:"Projeyi paydaşlara sunmak ve destek toplamak",type:"E"},{t:"Proje dosyalarını düzenlemek ve takibi yapmak",type:"C"}]},
+            {q:"Hangi tür görevlerde kendini daha enerjik hissedersin?",options:[{t:"Fiziksel bir şey yapmak (kurulum, düzenleme, taşıma)",type:"R"},{t:"İnsanlarla konuşmak, dinlemek, yardım etmek",type:"S"},{t:"Yaratıcı içerik üretmek (yazı, görsel, video)",type:"A"}]}
         ];
+        
         const rankingQuestions = [
-            {q:"Bir YGA projesi için aşağıdaki görevleri sırala (1=En çok keyif alırım, 4=En az keyif alırım):",options:[{text:"Projenin teknik altyapısını kurmak",type:"R"},{text:"Projenin etkisini araştırmak ve analiz etmek",type:"I"},{text:"Proje için yaratıcı içerikler üretmek",type:"A"},{text:"Proje ekibini yönetmek ve koordine etmek",type:"E"}]},
-            {q:"Bir bilim sahasında aşağıdaki aktiviteleri sırala:",options:[{text:"Setleri kurmak ve teknik hazırlıkları yapmak",type:"R"},{text:"Çocuklarla birebir ilgilenmek ve yardım etmek",type:"S"},{text:"Sahanın organizasyonunu ve lojistiğini yönetmek",type:"C"},{text:"Deneylerin bilimsel içeriğini geliştirmek",type:"I"}]},
-            {q:"Bir kampanya için aşağıdaki görevleri sırala:",options:[{text:"Kampanya görsellerini ve videolarını tasarlamak",type:"A"},{text:"Kampanyayı sosyal medyada yürütmek ve yönetmek",type:"E"},{text:"Kampanya metriklerini takip etmek ve raporlamak",type:"C"},{text:"Hedef kitle analizi ve strateji geliştirmek",type:"I"}]},
-            {q:"Twin için yeni bir özellik geliştiriliyor. Aşağıdaki rolleri sırala:",options:[{text:"Kod yazmak ve backend geliştirmek",type:"I"},{text:"Kullanıcı arayüzünü tasarlamak",type:"A"},{text:"Kullanıcılarla test yapıp feedback almak",type:"S"},{text:"Özelliği düzenli olarak test edip bug çıkarmak",type:"C"}]},
-            {q:"Bir toplantıda aşağıdaki rolleri sırala:",options:[{text:"Yaratıcı fikirler üretmek ve brainstorming yönetmek",type:"A"},{text:"Toplantıyı yönetmek ve kararları netleştirmek",type:"E"},{text:"Toplantı notlarını tutmak ve görevleri dağıtmak",type:"C"},{text:"Veri ve analiz sunmak",type:"I"}]},
-            {q:"Global Expansion için aşağıdaki görevleri sırala:",options:[{text:"Yeni ülkelerin pazar araştırmasını yapmak",type:"I"},{text:"Uluslararası ortaklarla görüşmeler yapmak",type:"E"},{text:"Expansion dokümanlarını ve planlarını hazırlamak",type:"C"},{text:"Expansion hikayesini anlatmak için içerik üretmek",type:"A"}]},
-            {q:"People & Culture için aşağıdaki aktiviteleri sırala:",options:[{text:"Gönüllülerle 1:1 görüşmeler yapıp onları dinlemek",type:"S"},{text:"Gönüllü memnuniyet anketleri ve analiz",type:"I"},{text:"Onboarding süreçlerini dokümante etmek",type:"C"},{text:"Team building aktiviteleri tasarlamak",type:"A"}]},
-            {q:"Sustainability projesinde aşağıdaki rolleri sırala:",options:[{text:"Çevresel etki ölçümlemesi ve raporlama",type:"I"},{text:"Sürdürülebilirlik kampanyaları tasarlamak",type:"A"},{text:"Sustainability paydaşlarıyla iş birliği kurmak",type:"E"},{text:"Sustainability metriklerini düzenli takip etmek",type:"C"}]},
-            {q:"Content üretimi için aşağıdaki formatları sırala:",options:[{text:"Yazılı içerik (blog, makale)",type:"I"},{text:"Video çekimi ve kurgusu",type:"A"},{text:"Sosyal medya community management",type:"S"},{text:"İçerik takvimleri ve planlama",type:"C"}]},
-            {q:"GSC için aşağıdaki görevleri sırala:",options:[{text:"Katılımcı ekiplere mentoring yapmak",type:"S"},{text:"Yarışma süreçlerini organize etmek",type:"C"},{text:"Projelerin teknik kalitesini değerlendirmek",type:"I"},{text:"Yarışmayı tanıtmak ve sponsorlarla görüşmek",type:"E"}]},
-            {q:"Satış sürecinde aşağıdaki rolleri sırala:",options:[{text:"Müşterilerle görüşmeler ve ikna",type:"E"},{text:"Satış verilerini analiz etmek",type:"I"},{text:"CRM sistemini yönetmek ve takip",type:"C"},{text:"Satış materyallerini tasarlamak",type:"A"}]},
-            {q:"Bir krizde (örn: son dakika değişiklikleri) aşağıdaki yaklaşımları sırala:",options:[{text:"Hızlıca pratik çözüm bulup uygulamak",type:"R"},{text:"Durumu analiz edip en iyi çözümü bulmak",type:"I"},{text:"Ekibin moralini yüksek tutmak",type:"S"},{text:"Krizi fırsata çevirmek için yaratıcı düşünmek",type:"A"}]}
+            {q:"Bir YGA projesi için aşağıdaki görevleri sırala (1=En çok keyif alırım, 4=En az keyif alırım):",options:[{t:"Projenin teknik altyapısını kurmak",type:"R"},{t:"Projenin etkisini araştırmak ve analiz etmek",type:"I"},{t:"Proje için yaratıcı içerikler üretmek",type:"A"},{t:"Proje ekibini yönetmek ve koordine etmek",type:"E"}]}
         ];
-        let state={stage:'welcome',currentQuestion:0,answers:{},rankingAnswers:{},scores:{R:0,I:0,A:0,S:0,E:0,C:0}};
-        function render(){const app=document.getElementById('app');if(state.stage==='welcome'){app.innerHTML=`<div class="min-h-screen flex items-center justify-center p-4"><div class="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-12 fade-in"><div class="text-center mb-8"><div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-6 flex items-center justify-center"><span class="text-white text-3xl font-bold">YGA</span></div><h1 class="text-4xl font-bold text-gray-900 mb-4">Gönüllü İlgi Alanları Testi</h1><p class="text-xl text-gray-600 mb-8">YGA'da hangi rollerde en çok keyif alacağını keşfet</p></div><div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 mb-8"><h2 class="text-lg font-semibold text-gray-900 mb-4">Önemli:</h2><ul class="space-y-3 text-gray-700"><li class="flex items-start"><svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span>Neyi iyi yaptığını değil, neyi yapmaktan zevk aldığını düşün</span></li><li class="flex items-start"><svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span>Başkalarının senden ne beklediğini değil, sen ne istediğini işaretle</span></li><li class="flex items-start"><svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span>'Doğru' cevap yok, sadece senin cevabın var</span></li><li class="flex items-start"><svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span>İlk içgüdünü takip et, çok düşünme</span></li></ul></div><div class="flex items-center justify-between text-sm text-gray-600 mb-8"><div class="flex items-center"><div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3"><span class="text-blue-600 font-semibold">66</span></div><span>Soru</span></div><div class="flex items-center"><div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3"><span class="text-purple-600 font-semibold">15</span></div><span>Dakika</span></div></div><button onclick="startTest()" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold py-4 rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl">Teste Başla</button></div></div>`;}else if(state.stage==='test'){renderTest();}else if(state.stage==='ranking'){renderRanking();}else if(state.stage==='results'){renderResults();}}
-        function renderTest(){const question=forcedChoiceQuestions[state.currentQuestion];const progress=(state.currentQuestion/forcedChoiceQuestions.length)*100;document.getElementById('app').innerHTML=`<div class="min-h-screen flex items-center justify-center p-4"><div class="max-w-3xl w-full"><div class="mb-8"><div class="flex items-center justify-between mb-3"><span class="text-sm font-medium text-gray-600">Soru ${state.currentQuestion+1} / ${forcedChoiceQuestions.length}</span><span class="text-sm font-medium text-blue-600">Bölüm 1: Seçim Soruları</span></div><div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-blue-600 to-purple-600 progress-bar" style="width: ${progress}%"></div></div></div><div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 fade-in"><h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 leading-relaxed">${question.q}</h2><div class="space-y-4">${question.options.map((option,idx)=>`<button onclick="handleAnswer('${option.type}')" class="w-full text-left p-6 rounded-2xl border-2 transition-all duration-200 hover:border-blue-500 hover:shadow-lg group ${state.answers[state.currentQuestion]===option.type?'border-blue-600 bg-blue-50 shadow-md':'border-gray-200 bg-white hover:bg-gray-50'}"><div class="flex items-start"><div class="w-6 h-6 rounded-full border-2 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0 transition-colors ${state.answers[state.currentQuestion]===option.type?'border-blue-600 bg-blue-600':'border-gray-300 group-hover:border-blue-500'}">${state.answers[state.currentQuestion]===option.type?'<div class="w-2 h-2 bg-white rounded-full"></div>':''}</div><span class="text-lg text-gray-800 leading-relaxed">${option.text}</span></div></button>`).join('')}</div>${state.currentQuestion>0?`<button onclick="previousQuestion()" class="mt-8 text-gray-600 hover:text-gray-900 font-medium transition-colors">← Önceki Soru</button>`:''}</div></div></div>`;}
-        function renderRanking(){const allComplete=checkAllRankingsComplete();document.getElementById('app').innerHTML=`<div class="min-h-screen p-4 py-12"><div class="max-w-4xl mx-auto"><div class="mb-8"><div class="flex items-center justify-between mb-3"><span class="text-sm font-medium text-gray-600">Bölüm 2: Sıralama Soruları</span><span class="text-sm font-medium text-purple-600">Son Aşama</span></div><div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-purple-600 to-pink-600 w-full"></div></div></div><div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-8 fade-in"><h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Son Aşama: Aktiviteleri Sırala</h2><p class="text-gray-600 mb-8 text-lg">Her soruda aktiviteleri <span class="font-semibold text-purple-600">1-4 arası sırala</span>. (1=En çok keyif alırım, 4=En az keyif alırım)</p><div class="space-y-12">${rankingQuestions.map((question,qIdx)=>`<div class="border-b border-gray-200 pb-8 last:border-b-0"><h3 class="text-lg font-semibold text-gray-900 mb-6">${qIdx+1}. ${question.q}</h3><div class="space-y-4">${question.options.map((option,optIdx)=>`<div class="bg-gray-50 rounded-xl p-5"><div class="flex items-center justify-between"><span class="text-gray-800 flex-1 pr-4">${option.text}</span><div class="flex gap-2">${[1,2,3,4].map(rank=>`<button onclick="handleRanking(${qIdx}, ${optIdx}, ${rank})" class="w-12 h-12 rounded-xl font-semibold transition-all duration-200 ${(state.rankingAnswers[qIdx]&&state.rankingAnswers[qIdx][optIdx]===rank)?'bg-gradient-to-br from-purple-600 to-pink-600 text-white shadow-lg scale-110':'bg-white text-gray-600 border-2 border-gray-300 hover:border-purple-500 hover:text-purple-600'}">${rank}</button>`).join('')}</div></div></div>`).join('')}</div></div>`).join('')}</div></div><button onclick="calculateResults()" ${!allComplete?'disabled':''} class="w-full text-lg font-semibold py-5 rounded-2xl transition-all duration-200 shadow-lg flex items-center justify-center ${allComplete?'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 hover:shadow-xl':'bg-gray-300 text-gray-500 cursor-not-allowed'}">${allComplete?'Sonuçları Gör →':'Lütfen tüm soruları tamamla'}</button></div></div>`;}
-        function renderResults(){const typeInfo={R:{name:"Realistic",desc:"Pratik, elle yapma, teknik"},I:{name:"Investigative",desc:"Analitik, araştırmacı, meraklı"},A:{name:"Artistic",desc:"Yaratıcı, özgün, ifade odaklı"},S:{name:"Social",desc:"İnsancıl, yardımsever, empatik"},E:{name:"Enterprising",desc:"Girişimci, lider, ikna edici"},C:{name:"Conventional",desc:"Organize, sistemli, detaycı"}};const topTypes=Object.entries(state.scores).sort((a,b)=>b[1]-a[1]).slice(0,3);const maxScore=102;const roles=getRoleRecommendations();document.getElementById('app').innerHTML=`<div class="min-h-screen p-4 py-12"><div class="max-w-4xl mx-auto"><div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-8 fade-in"><div class="text-center mb-12"><div class="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full mx-auto mb-6 flex items-center justify-center"><svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg></div><h1 class="text-4xl font-bold text-gray-900 mb-4">Sonuçların Hazır!</h1><p class="text-xl text-gray-600">İşte senin YGA ilgi alanı profilin</p></div><div class="mb-12"><h2 class="text-2xl font-bold text-gray-900 mb-6">📊 RIASEC Profil Skorların</h2><div class="space-y-4">${Object.entries(state.scores).map(([type,score])=>{const info=typeInfo[type];const percentage=Math.round((score/maxScore)*100);return`<div><div class="flex items-center justify-between mb-2"><div><span class="font-semibold text-gray-900 text-lg">${type} - ${info.name}</span><span class="text-gray-600 text-sm ml-3">${info.desc}</span></div><span class="font-bold text-2xl text-gray-900">${percentage}%</span></div><div class="w-full h-4 bg-gray-200 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-blue-600 to-purple-600 progress-bar" style="width: ${percentage}%"></div></div></div>`;}).join('')}</div></div><div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 mb-12"><h2 class="text-2xl font-bold text-gray-900 mb-4">🎯 Senin Profil Tipin</h2><div class="text-center mb-6"><div class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-2xl text-3xl font-bold mb-4">${topTypes[0][0]}-${topTypes[1][0]}</div><p class="text-xl text-gray-700 font-medium">${typeInfo[topTypes[0][0]].name} - ${typeInfo[topTypes[1][0]].name}</p></div><div class="grid md:grid-cols-3 gap-4 mt-6">${topTypes.map(([type,score],idx)=>`<div class="bg-white rounded-xl p-4 text-center"><div class="text-sm text-gray-600 mb-1">${idx===0?'🥇 En Yüksek':idx===1?'🥈 İkinci':'🥉 Üçüncü'}</div><div class="text-2xl font-bold text-gray-900">${type}</div><div class="text-sm text-gray-600">${Math.round((score/maxScore)*100)}%</div></div>`).join('')}</div></div><div class="mb-12"><h2 class="text-2xl font-bold text-gray-900 mb-6">⭐ Senin İçin En Uygun YGA Rolleri</h2><div class="space-y-4">${roles.map((role,idx)=>`<div class="bg-gradient-to-r from-white to-gray-50 border-2 border-gray-200 rounded-2xl p-6 hover:border-blue-500 hover:shadow-lg transition-all duration-200"><div class="flex items-center"><div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4 flex-shrink-0">${idx+1}</div><div><h3 class="text-xl font-bold text-gray-900">${role}</h3><p class="text-gray-600">${idx===0?'En uygun rol - Kuvvetli yönlerinle tam uyumlu':idx===1?'Çok uygun - İlgi alanlarına çok yakın':'Uygun - Gelişim için harika fırsat'}</p></div></div></div>`).join('')}</div></div><div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8"><h2 class="text-2xl font-bold text-gray-900 mb-4">💡 Bir Sonraki Adım</h2><ul class="space-y-3 text-gray-700 text-lg"><li class="flex items-start"><svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg><span>101 Kampı'nda mentorünle bu sonuçları konuş</span></li><li class="flex items-start"><svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg><span>İlk projende <strong>${roles[0]}</strong> alanını dene</span></li><li class="flex items-start"><svg class="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg><span>Kendini gözlemle ve geliştir!</span></li></ul></div></div><button onclick="location.reload()" class="w-full bg-gray-200 text-gray-700 text-lg font-semibold py-4 rounded-2xl hover:bg-gray-300 transition-all duration-200">Testi Yeniden Başlat</button></div></div>`;}
-        function startTest(){state.stage='test';render();}
-        function handleAnswer(type){state.answers[state.currentQuestion]=type;if(state.currentQuestion<forcedChoiceQuestions.length-1){setTimeout(()=>{state.currentQuestion++;render();},200);}else{setTimeout(()=>{state.stage='ranking';render();},200);}}
-        function previousQuestion(){if(state.currentQuestion>0){state.currentQuestion--;render();}}
-        function handleRanking(qIdx,optIdx,rank){if(!state.rankingAnswers[qIdx])state.rankingAnswers[qIdx]={};state.rankingAnswers[qIdx][optIdx]=rank;render();}
-        function checkAllRankingsComplete(){return rankingQuestions.every((_,qIdx)=>{const rankings=state.rankingAnswers[qIdx];if(!rankings)return false;const values=Object.values(rankings);return values.length===4&&new Set(values).size===4&&values.every(v=>v>=1&&v<=4);});}
-        function calculateResults(){const newScores={R:0,I:0,A:0,S:0,E:0,C:0};Object.values(state.answers).forEach(type=>{newScores[type]+=1;});Object.entries(state.rankingAnswers).forEach(([qIndex,rankings])=>{const question=rankingQuestions[parseInt(qIndex)];Object.entries(rankings).forEach(([optIndex,rank])=>{const option=question.options[parseInt(optIndex)];const points=5-parseInt(rank);newScores[option.type]+=points;});});state.scores=newScores;state.stage='results';render();}
-        function getRoleRecommendations(){const topTypes=Object.entries(state.scores).sort((a,b)=>b[1]-a[1]).slice(0,3);const primary=topTypes[0][0];const secondary=topTypes[1][0];const roleMap={SI:['Bilim Seferberliği','Program Development','People & Culture'],IS:['Bilim Seferberliği','Program Development','Product'],IA:['Product','Technology','Content'],AI:['Product','Content','Technology'],EA:['Gönüllendirin (Marketing)','Global Expansion','Content'],AE:['Gönüllendirin (Marketing)','Content','Global Expansion'],ES:['People & Culture','Global Expansion','GSC'],SE:['People & Culture','Bilim Seferberliği','GSC'],EI:['Global Expansion','Satış','GSC'],IE:['Product','Global Expansion','Sustainability'],IC:['Technology','Product','Sustainability'],CI:['Technology','Product','Program Development'],SC:['People & Culture','Bilim Seferberliği','Program Development'],CS:['People & Culture','Program Development','Content'],EC:['Global Expansion','Satış','GSC'],CE:['Product','Program Development','Technology'],RI:['Technology','Bilim Seferberliği','Product'],IR:['Technology','Product','Sustainability'],RA:['Content','Technology','Bilim Seferberliği'],AR:['Content','Product','Technology'],RS:['Bilim Seferberliği','Technology','Program Development'],SR:['Bilim Seferberliği','People & Culture','Program Development'],RC:['Technology','Product','Bilim Seferberliği'],CR:['Technology','Product','Program Development'],RE:['Satış','Global Expansion','Technology'],ER:['Global Expansion','Satış','GSC'],AS:['Content','People & Culture','Gönüllendirin'],SA:['People & Culture','Content','Bilim Seferberliği'],AC:['Content','Product','Gönüllendirin'],CA:['Content','Product','Technology']};return roleMap[primary+secondary]||['Product','Program Development','Content'];}
+        
+        // State
+        let state = {
+            stage: 'welcome',
+            currentQ: 0,
+            answers: {},
+            rankings: {},
+            scores: {R:0,I:0,A:0,S:0,E:0,C:0}
+        };
+        
+        // Render fonksiyonları
+        function renderWelcome() {
+            return `
+                <div class="container">
+                    <div class="card">
+                        <div class="logo">
+                            <div class="logo-text">YGA</div>
+                        </div>
+                        <h1>Gönüllü İlgi Alanları Testi</h1>
+                        <p class="subtitle">YGA'da hangi rollerde en çok keyif alacağını keşfet</p>
+                        
+                        <div class="info-box">
+                            <div class="info-title">Önemli:</div>
+                            <ul class="info-list">
+                                <li class="info-item">
+                                    <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span>Neyi iyi yaptığını değil, neyi yapmaktan zevk aldığını düşün</span>
+                                </li>
+                                <li class="info-item">
+                                    <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span>Başkalarının senden ne beklediğini değil, sen ne istediğini işaretle</span>
+                                </li>
+                                <li class="info-item">
+                                    <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span>'Doğru' cevap yok, sadece senin cevabın var</span>
+                                </li>
+                                <li class="info-item">
+                                    <svg class="check-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    <span>İlk içgüdünü takip et, çok düşünme</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-badge blue">5</div>
+                                <span>Soru</span>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-badge purple">5</div>
+                                <span>Dakika</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn" onclick="startTest()">Teste Başla</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderTest() {
+            const q = questions[state.currentQ];
+            const progress = ((state.currentQ + 1) / questions.length) * 100;
+            const selected = state.answers[state.currentQ];
+            
+            return `
+                <div class="container">
+                    <div class="card">
+                        <div class="progress-container">
+                            <div class="progress-info">
+                                <span class="left">Soru ${state.currentQ + 1} / ${questions.length}</span>
+                                <span class="right">Seçim Soruları</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: ${progress}%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="question-text">${q.q}</div>
+                        
+                        <div class="options">
+                            ${q.options.map((opt, i) => `
+                                <div class="option ${selected === opt.type ? 'selected' : ''}" onclick="selectAnswer('${opt.type}')">
+                                    <div class="option-radio">
+                                        <div class="option-radio-inner"></div>
+                                    </div>
+                                    <div class="option-text">${opt.t}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        ${state.currentQ > 0 ? '<button class="back-btn" onclick="prevQuestion()">← Önceki Soru</button>' : ''}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderRanking() {
+            const allDone = checkRankingComplete();
+            
+            return `
+                <div class="container">
+                    <div class="card">
+                        <div class="progress-container">
+                            <div class="progress-info">
+                                <span class="left">Sıralama Soruları</span>
+                                <span class="right">Son Aşama</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        
+                        <h1>Son Aşama: Aktiviteleri Sırala</h1>
+                        <p class="subtitle">Aktiviteleri 1-4 arası sırala (1=En çok keyif alırım)</p>
+                        
+                        ${rankingQuestions.map((rq, qi) => `
+                            <div class="ranking-container">
+                                <div class="ranking-question">${qi + 1}. ${rq.q}</div>
+                                <div class="ranking-options">
+                                    ${rq.options.map((opt, oi) => `
+                                        <div class="ranking-option">
+                                            <div class="ranking-option-content">
+                                                <div class="ranking-option-text">${opt.t}</div>
+                                                <div class="ranking-buttons">
+                                                    ${[1,2,3,4].map(rank => `
+                                                        <button class="rank-btn ${state.rankings[qi]?.[oi] === rank ? 'selected' : ''}" 
+                                                                onclick="selectRank(${qi}, ${oi}, ${rank})">${rank}</button>
+                                                    `).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                        
+                        <button class="btn" ${!allDone ? 'disabled' : ''} onclick="calculateResults()">
+                            ${allDone ? 'Sonuçları Gör →' : 'Lütfen tüm soruları tamamla'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderResults() {
+            const typeInfo = {
+                R: {name:"Realistic",desc:"Pratik, elle yapma, teknik"},
+                I: {name:"Investigative",desc:"Analitik, araştırmacı, meraklı"},
+                A: {name:"Artistic",desc:"Yaratıcı, özgün, ifade odaklı"},
+                S: {name:"Social",desc:"İnsancıl, yardımsever, empatik"},
+                E: {name:"Enterprising",desc:"Girişimci, lider, ikna edici"},
+                C: {name:"Conventional",desc:"Organize, sistemli, detaycı"}
+            };
+            
+            const sorted = Object.entries(state.scores).sort((a,b) => b[1] - a[1]);
+            const top3 = sorted.slice(0, 3);
+            const maxScore = 10;
+            
+            return `
+                <div class="container">
+                    <div class="card">
+                        <div class="results-header">
+                            <div class="results-icon">
+                                <svg style="width:3rem;height:3rem;color:white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <h1>Sonuçların Hazır!</h1>
+                            <p class="subtitle">İşte senin YGA ilgi alanı profilin</p>
+                        </div>
+                        
+                        <div class="score-section">
+                            <div class="section-title">📊 RIASEC Profil Skorların</div>
+                            ${Object.entries(state.scores).map(([type, score]) => {
+                                const info = typeInfo[type];
+                                const pct = Math.round((score / maxScore) * 100);
+                                return `
+                                    <div class="score-item">
+                                        <div class="score-info">
+                                            <div>
+                                                <span class="score-label">${type} - ${info.name}</span>
+                                                <span class="score-desc">${info.desc}</span>
+                                            </div>
+                                            <span class="score-percentage">${pct}%</span>
+                                        </div>
+                                        <div class="score-bar-bg">
+                                            <div class="score-bar" style="width: ${pct}%"></div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        
+                        <div class="profile-box">
+                            <div class="section-title">🎯 Senin Profil Tipin</div>
+                            <center>
+                                <div class="profile-badge">${top3[0][0]}-${top3[1][0]}</div>
+                                <p class="profile-subtitle">${typeInfo[top3[0][0]].name} - ${typeInfo[top3[1][0]].name}</p>
+                            </center>
+                            
+                            <div class="top-scores">
+                                ${top3.map(([type, score], i) => `
+                                    <div class="top-score-card">
+                                        <div class="top-score-rank">${i===0?'🥇 En Yüksek':i===1?'🥈 İkinci':'🥉 Üçüncü'}</div>
+                                        <div class="top-score-type">${type}</div>
+                                        <div class="top-score-percent">${Math.round((score/maxScore)*100)}%</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="score-section">
+                            <div class="section-title">⭐ Senin İçin En Uygun YGA Rolleri</div>
+                            <div class="roles-list">
+                                ${['Bilim Seferberliği', 'Program Development', 'People & Culture'].map((role, i) => `
+                                    <div class="role-card">
+                                        <div class="role-number">${i+1}</div>
+                                        <div>
+                                            <div class="role-name">${role}</div>
+                                            <div class="role-desc">${i===0?'En uygun rol - Kuvvetli yönlerinle tam uyumlu':i===1?'Çok uygun - İlgi alanlarına çok yakın':'Uygun - Gelişim için harika fırsat'}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="next-steps">
+                            <div class="section-title">💡 Bir Sonraki Adım</div>
+                            <ul class="next-steps-list">
+                                <li class="next-step">
+                                    <svg class="arrow-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+                                    <span>101 Kampı'nda mentorünle bu sonuçları konuş</span>
+                                </li>
+                                <li class="next-step">
+                                    <svg class="arrow-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+                                    <span>İlk projende <strong>Bilim Seferberliği</strong> alanını dene</span>
+                                </li>
+                                <li class="next-step">
+                                    <svg class="arrow-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+                                    <span>Kendini gözlemle ve geliştir!</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-secondary" onclick="restart()">Testi Yeniden Başlat</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Event handlers
+        function startTest() {
+            state.stage = 'test';
+            render();
+        }
+        
+        function selectAnswer(type) {
+            state.answers[state.currentQ] = type;
+            setTimeout(() => {
+                if (state.currentQ < questions.length - 1) {
+                    state.currentQ++;
+                    render();
+                } else {
+                    state.stage = 'ranking';
+                    render();
+                }
+            }, 200);
+        }
+        
+        function prevQuestion() {
+            if (state.currentQ > 0) {
+                state.currentQ--;
+                render();
+            }
+        }
+        
+        function selectRank(qi, oi, rank) {
+            if (!state.rankings[qi]) state.rankings[qi] = {};
+            state.rankings[qi][oi] = rank;
+            render();
+        }
+        
+        function checkRankingComplete() {
+            return rankingQuestions.every((_, qi) => {
+                const r = state.rankings[qi];
+                if (!r) return false;
+                const vals = Object.values(r);
+                return vals.length === 4 && new Set(vals).size === 4 && vals.every(v => v >= 1 && v <= 4);
+            });
+        }
+        
+        function calculateResults() {
+            // Forced choice scoring
+            Object.values(state.answers).forEach(type => {
+                state.scores[type]++;
+            });
+            
+            // Ranking scoring
+            Object.entries(state.rankings).forEach(([qi, ranks]) => {
+                const rq = rankingQuestions[parseInt(qi)];
+                Object.entries(ranks).forEach(([oi, rank]) => {
+                    const opt = rq.options[parseInt(oi)];
+                    state.scores[opt.type] += (5 - rank);
+                });
+            });
+            
+            state.stage = 'results';
+            render();
+        }
+        
+        function restart() {
+            state = {
+                stage: 'welcome',
+                currentQ: 0,
+                answers: {},
+                rankings: {},
+                scores: {R:0,I:0,A:0,S:0,E:0,C:0}
+            };
+            render();
+        }
+        
+        // Main render
+        function render() {
+            let html = '';
+            if (state.stage === 'welcome') html = renderWelcome();
+            else if (state.stage === 'test') html = renderTest();
+            else if (state.stage === 'ranking') html = renderRanking();
+            else if (state.stage === 'results') html = renderResults();
+            
+            document.getElementById('app').innerHTML = html;
+        }
+        
+        // Initialize
         render();
     </script>
 </body>
