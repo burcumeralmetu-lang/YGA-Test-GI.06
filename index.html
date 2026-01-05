@@ -193,7 +193,7 @@
         }
         
         .question-text {
-            font-size: 1.875rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #111827;
             margin-bottom: 2rem;
@@ -294,7 +294,7 @@
             border-bottom: 1px solid #e5e7eb;
         }
         
-        .ranking-container:last-child {
+        .ranking-container:last-of-type {
             border-bottom: none;
         }
         
@@ -587,7 +587,7 @@
             }
             
             .question-text {
-                font-size: 1.5rem;
+                font-size: 1.25rem;
             }
             
             .top-scores {
@@ -600,20 +600,78 @@
     <div id="app"></div>
     
     <script>
-        // Veri
         const questions = [
             {q:"Bir YGA etkinliğinde hangi rolü almak daha çok zevk verir?",options:[{t:"Sahne düzenini kurmak ve teknik ekipmanları ayarlamak",type:"R"},{t:"Katılımcılarla sohbet edip onları rahat ettirmek",type:"S"},{t:"Etkinlik programını detaylı şekilde planlamak",type:"C"}]},
             {q:"Boş bir cumartesi günün var. Ne yapmayı tercih edersin?",options:[{t:"Yeni bir araştırma makalesini okumak veya belgesel izlemek",type:"I"},{t:"Arkadaşlarınla bir şeyler organize etmek",type:"E"},{t:"Bir hobi projesinde yaratıcı bir şey üretmek",type:"A"}]},
             {q:"Bir bilim sahasında çocuklar ilgisiz görünüyor. Ne yaparsın?",options:[{t:"Deneyi daha görsel ve eğlenceli hale getiririm",type:"A"},{t:"Çocuklarla birebir konuşup ne merak ettiklerini anlamaya çalışırım",type:"S"},{t:"Deneyin bilimsel mantığını farklı şekilde açıklarım",type:"I"}]},
             {q:"YGA'da yeni bir proje başlatılacak. Hangi kısmında yer almak istersin?",options:[{t:"Projenin nasıl çalışacağını analiz edip araştırma yapmak",type:"I"},{t:"Projeyi paydaşlara sunmak ve destek toplamak",type:"E"},{t:"Proje dosyalarını düzenlemek ve takibi yapmak",type:"C"}]},
-            {q:"Hangi tür görevlerde kendini daha enerjik hissedersin?",options:[{t:"Fiziksel bir şey yapmak (kurulum, düzenleme, taşıma)",type:"R"},{t:"İnsanlarla konuşmak, dinlemek, yardım etmek",type:"S"},{t:"Yaratıcı içerik üretmek (yazı, görsel, video)",type:"A"}]}
+            {q:"Hangi tür görevlerde kendini daha enerjik hissedersin?",options:[{t:"Fiziksel bir şey yapmak (kurulum, düzenleme, taşıma)",type:"R"},{t:"İnsanlarla konuşmak, dinlemek, yardım etmek",type:"S"},{t:"Yaratıcı içerik üretmek (yazı, görsel, video)",type:"A"}]},
+            {q:"Twin bilim setleriyle ilgili bir görev var. Hangisini seçersin?",options:[{t:"Setleri kurmak ve çocuklara nasıl kullanılacağını göstermek",type:"R"},{t:"Setlerle yapılabilecek yeni deneyler araştırmak",type:"I"},{t:"Setlerin envanter takibini ve lojistiğini yönetmek",type:"C"}]},
+            {q:"Bir webinar hazırlığı yapılıyor. Hangi görevi tercih edersin?",options:[{t:"Konuşmacıların sunumlarını tasarlamak",type:"A"},{t:"Katılımcı kayıtlarını organize etmek ve hatırlatmalar göndermek",type:"C"},{t:"Webinar akışını yönetmek ve ekibi koordine etmek",type:"E"}]},
+            {q:"Hangi durumda daha mutlu olursun?",options:[{t:"Karmaşık bir problemi çözdüğünde",type:"I"},{t:"Birine yardım edip onu mutlu ettiğinde",type:"S"},{t:"Orijinal bir fikir üretip hayata geçirdiğinde",type:"A"}]},
+            {q:"YGA için yurt dışı bir toplantıya gidiyorsun. Neler yaparsın?",options:[{t:"Sunumları hazırlamak ve temsil etmek",type:"E"},{t:"Toplantı notlarını tutmak ve raporlamak",type:"C"},{t:"Oradaki insanlarla tanışmak ve ilişki kurmak",type:"S"}]},
+            {q:"Bilim Seferberliği için yeni bir lokasyon araştırması yapılıyor. Hangisinde yer alırsın?",options:[{t:"Verileri analiz edip en uygun yeri bulmak",type:"I"},{t:"Yerel paydaşlarla görüşmeler yapmak",type:"E"},{t:"Lojistik planlamayı ve bütçeyi hesaplamak",type:"C"}]},
+            {q:"Bir kampda hangi aktivitede olmak daha zevkli?",options:[{t:"Gece ateş başında hikaye anlatmak veya oyun yönetmek",type:"A"},{t:"Yeni katılanlarla tanışıp onlara rehberlik etmek",type:"S"},{t:"Kampın günlük programını organize etmek",type:"C"}]},
+            {q:"Aşağıdaki çalışma ortamlarından hangisinde daha verimli olursun?",options:[{t:"Atölyede, makerspace'te, fiziksel şeyler üzerinde çalışırken",type:"R"},{t:"İnsanlarla dolu bir ortamda, sürekli etkileşimde",type:"S"},{t:"Sessiz bir yerde, düşünüp araştırma yaparken",type:"I"}]},
+            {q:"Twin uygulaması için yeni bir özellik geliştiriliyor. Hangi kısmında olmak istersin?",options:[{t:"Kullanıcı deneyimini (UX) tasarlamak",type:"A"},{t:"Teknik altyapıyı kodlamak",type:"I"},{t:"Kullanıcı testleri yapıp feedback toplamak",type:"S"}]},
+            {q:"Zirve hazırlığında hangi görevi tercih edersin?",options:[{t:"Sahne tasarımını ve dekorasyonu yapmak",type:"A"},{t:"Katılımcı deneyimini planlamak ve akışı yönetmek",type:"E"},{t:"Kayıtları ve katılımcı listelerini yönetmek",type:"C"}]},
+            {q:"Yeni bir gönüllüyle çalışıyorsun. Nasıl yaklaşırsın?",options:[{t:"Ona görevlerini net şekilde açıklarım ve takip ederim",type:"C"},{t:"Onunla oturup tanışırım, neye ihtiyacı var dinlerim",type:"S"},{t:"Ona zorlayıcı bir görev verip öğrenmesini izlerim",type:"E"}]},
+            {q:"Hangi başarı seni daha çok tatmin eder?",options:[{t:"Bir şeyi baştan sona kendin ürettiğinde",type:"R"},{t:"Bir sorunu analiz edip çözüm bulduğunda",type:"I"},{t:"Bir ekibi başarıya taşıdığında",type:"E"}]},
+            {q:"Content ekibi için yeni bir video çekiliyor. Nerede olmak istersin?",options:[{t:"Kamera ve ışık ayarlarını yapmak",type:"R"},{t:"Senaryo ve konsept geliştirmek",type:"A"},{t:"Çekimleri organize edip ekibi yönetmek",type:"E"}]},
+            {q:"Global Expansion için bir sunum hazırlanıyor. Hangisini yaparsın?",options:[{t:"Verileri araştırıp stratejik analiz yapmak",type:"I"},{t:"Sunumu görsel ve çekici hale getirmek",type:"A"},{t:"Sunumu yapmak ve paydaşları ikna etmek",type:"E"}]},
+            {q:"Bir bilim sahasında teknik bir sorun oluştu. Ne yaparsın?",options:[{t:"Sorunu hemen kendim çözmeye çalışırım",type:"R"},{t:"Ekiple birlikte beyin fırtınası yaparım",type:"S"},{t:"Problemi sistematik şekilde analiz edip çözüm ararım",type:"I"}]},
+            {q:"YGA'nın sosyal medya içerikleri için ne yapmak istersin?",options:[{t:"Görseller ve videolar tasarlamak",type:"A"},{t:"Analitikleri takip edip strateji geliştirmek",type:"I"},{t:"Takipçilerle etkileşime geçmek ve community yönetmek",type:"S"}]},
+            {q:"Sustainability projeleri için hangi rolde olmak istersin?",options:[{t:"Çevresel etki analizi yapmak",type:"I"},{t:"Paydaşlarla iş birlikleri kurmak",type:"E"},{t:"Projelerin düzenli raporlamasını yapmak",type:"C"}]},
+            {q:"Hangi tür toplantılarda daha aktif ve enerjik olursun?",options:[{t:"Beyin fırtınası ve yaratıcı çalışma toplantıları",type:"A"},{t:"Stratejik planlama ve karar alma toplantıları",type:"E"},{t:"Detaylı veri analizi ve raporlama toplantıları",type:"I"}]},
+            {q:"Program Development için yeni bir kamp tasarlanıyor. Nerede katkı sağlarsın?",options:[{t:"Kampın eğitim içeriğini araştırmak",type:"I"},{t:"Kampın interaktif aktivitelerini tasarlamak",type:"A"},{t:"Kampın lojistiğini ve timeline'ını planlamak",type:"C"}]},
+            {q:"People & Culture ekibinde hangi görevi tercih edersin?",options:[{t:"Gönüllülerle 1:1 görüşmeler yapıp onları dinlemek",type:"S"},{t:"Engagement anketleri ve veri analizi",type:"I"},{t:"Onboarding süreçlerini sistematize etmek",type:"C"}]},
+            {q:"Bir çocuk sahada 'Ben bunu yapamam' diyor. Ne yaparsın?",options:[{t:"Ona adım adım gösteririm, beraber yaparız",type:"S"},{t:"Onu farklı bir yaklaşım denemeye teşvik ederim",type:"A"},{t:"Ona neden yapabileceğini mantıksal olarak açıklarım",type:"I"}]},
+            {q:"GSC (Global Sustainability Challenge) için ne yapmak istersin?",options:[{t:"Katılımcı ekiplere mentoring yapmak",type:"S"},{t:"Yarışmanın organizasyonunu ve jüri sürecini yönetmek",type:"E"},{t:"Projlerin teknik kalitesini değerlendirmek",type:"I"}]},
+            {q:"Satış ekibinde hangi rolü tercih edersin?",options:[{t:"Potansiyel müşterilerle görüşmeler yapmak",type:"E"},{t:"Satış verilerini analiz edip strateji geliştirmek",type:"I"},{t:"CRM sistemini düzenlemek ve takip yapmak",type:"C"}]},
+            {q:"Twin AI Companion için hangi kısımda çalışmak istersin?",options:[{t:"Algoritma ve makine öğrenmesi geliştirmek",type:"I"},{t:"Kullanıcı arayüzünü tasarlamak",type:"A"},{t:"Kullanıcı testleri yapıp feedback toplamak",type:"S"}]},
+            {q:"Bir proje başarısız oldu. Nasıl tepki verirsin?",options:[{t:"Neyin yanlış gittiğini analiz ederim",type:"I"},{t:"Ekibin moralini yüksek tutmaya çalışırım",type:"S"},{t:"Hemen yeni bir plan yapar, harekete geçerim",type:"E"}]},
+            {q:"Technology ekibinde hangi rolü tercih edersin?",options:[{t:"Backend development ve database yönetimi",type:"I"},{t:"Frontend development ve görsel tasarım",type:"A"},{t:"Bug fixing ve sistem bakımı",type:"R"}]},
+            {q:"Ruanda Eğitim Bakanlığı ile görüşme var. Hazırlıkta nasıl katkı sağlarsın?",options:[{t:"Sunum materyallerini hazırlamak",type:"A"},{t:"Görüşmeyi yönetmek ve müzakere etmek",type:"E"},{t:"Arka planda veri ve raporlar hazırlamak",type:"I"}]},
+            {q:"Spokes bisiklet projesi için hangi görevi tercih edersin?",options:[{t:"Rota planlaması ve lojistik",type:"C"},{t:"Yol boyunca çocuklarla etkileşim",type:"S"},{t:"Projenin hikayesini anlatmak ve belgelemek",type:"A"}]},
+            {q:"Gönüllendirin (Marketing) ekibinde ne yapmak istersin?",options:[{t:"Kampanya stratejileri geliştirmek",type:"E"},{t:"Yaratıcı içerikler üretmek",type:"A"},{t:"Kampanya metriklerini takip etmek",type:"C"}]},
+            {q:"Bir çocuk bir deneyde beklenmedik bir sonuç buldu. Ne yaparsın?",options:[{t:"'Vay! Bunu neden oldu acaba? Araştıralım!' derim",type:"I"},{t:"'Harika bir keşif yaptın!' diyerek onu kutlarım",type:"S"},{t:"'Farklı bir şey deneyelim belki daha ilginç olur' derim",type:"A"}]},
+            {q:"Twin Digital Library için hangi kısımda çalışmak istersin?",options:[{t:"İçerik kataloglaması ve organizasyonu",type:"C"},{t:"Yeni eğitim materyalleri geliştirmek",type:"I"},{t:"Kullanıcı engagement stratejileri",type:"E"}]},
+            {q:"Bilim Seferberliği'nin etkisini nasıl ölçmek istersin?",options:[{t:"Veri toplama ve istatistiksel analiz",type:"I"},{t:"Çocuklarla röportajlar yapma",type:"S"},{t:"Raporlama ve görselleştirme",type:"A"}]},
+            {q:"Yeni bir gönüllü kampa geldi ve kaybolmuş görünüyor. Ne yaparsın?",options:[{t:"Ona yaklaşır, kendimi tanıtır, yardım teklif ederim",type:"S"},{t:"Ona kampın haritasını ve programını detaylı açıklarım",type:"C"},{t:"Onu gruba dahil eder, tanışmasını sağlarım",type:"E"}]},
+            {q:"Product ekibinde hangi görevi tercih edersin?",options:[{t:"Kullanıcı ihtiyaçlarını araştırmak",type:"I"},{t:"Product roadmap ve prioritization",type:"E"},{t:"Feature testleri ve QA",type:"C"}]},
+            {q:"Hangi tür görevlerde zaman nasıl geçtiğini anlamazsın?",options:[{t:"Bir şeyleri tamir ederken veya monte ederken",type:"R"},{t:"Araştırma yaparken veya veri analiz ederken",type:"I"},{t:"Yaratıcı çalışırken (yazarken, tasarlarken)",type:"A"}]},
+            {q:"Program Development'ta hangi kısma odaklanırsın?",options:[{t:"Gönüllü deneyimini iyileştirmek",type:"S"},{t:"Program etkisini ölçümlemek",type:"I"},{t:"Süreçleri optimize etmek",type:"C"}]},
+            {q:"Bir toplantıda hangi rol sana daha doğal gelir?",options:[{t:"Not alan, görevleri takip eden",type:"C"},{t:"Yaratıcı fikirler öneren",type:"A"},{t:"Toplantıyı yöneten, kararları organize eden",type:"E"}]},
+            {q:"Content üretimi için hangi formatı tercih edersin?",options:[{t:"Yazılı içerik (blog, makale)",type:"I"},{t:"Video içerik (çekim, kurgu)",type:"A"},{t:"İnfografik ve data visualization",type:"A"}]},
+            {q:"Global Expansion için yeni bir ülke araştırması yapılıyor. Nasıl katkı sağlarsın?",options:[{t:"Ülkenin eğitim sistemini analiz etmek",type:"I"},{t:"Yerel ortaklarla networking yapmak",type:"E"},{t:"Feasibility raporunu hazırlamak",type:"C"}]},
+            {q:"Bir çocuğun ailesi sahaya geldi ve YGA'yı merak ediyor. Ne yaparsın?",options:[{t:"Onlarla sıcak bir şekilde sohbet eder, YGA'yı anlatırım",type:"S"},{t:"Onlara YGA'nın etki raporlarını ve verilerini gösteririm",type:"I"},{t:"Onları bir bilim deneyi yapmaya davet ederim",type:"R"}]},
+            {q:"Technology stack kararı alınıyor. Hangi yaklaşımı tercih edersin?",options:[{t:"En yeni teknolojileri araştırıp denerim",type:"I"},{t:"Ekiple konuşur, ihtiyaçları dinlerim",type:"S"},{t:"Mevcut sistemlerle uyumlu, stabil olanı seçerim",type:"C"}]},
+            {q:"Sustainability projelerinde hangi kısım seni daha çok heyecanlandırır?",options:[{t:"Carbon footprint hesaplama ve analiz",type:"I"},{t:"Yeşil kampanyalar tasarlama",type:"A"},{t:"Paydaşlarla sürdürülebilirlik anlaşmaları yapmak",type:"E"}]},
+            {q:"People & Culture için yeni bir initiative başlatılıyor. Hangisini tercih edersin?",options:[{t:"Mentoring programı tasarlamak",type:"S"},{t:"Gönüllü gelişim framework'ü oluşturmak",type:"I"},{t:"Team building aktiviteleri organize etmek",type:"E"}]},
+            {q:"Bilim Seferberliği için yeni bir deney seti geliştiriliyor. Nerede olmak istersin?",options:[{t:"Deneyin bilimsel içeriğini tasarlamak",type:"I"},{t:"Fiziksel materyalleri kurmak ve test etmek",type:"R"},{t:"Deneyin anlaşılır şekilde çocuklara anlatılmasını sağlamak",type:"S"}]},
+            {q:"GSC için sponsorluk görüşmeleri yapılıyor. Hangi rolü tercih edersin?",options:[{t:"Sponsorluk paketlerini hazırlamak",type:"C"},{t:"Sponsorlarla görüşmeler yapmak",type:"E"},{t:"Sponsorluk etkisini ölçümlemek",type:"I"}]},
+            {q:"Hangi tür çalışma seni daha çok motive eder?",options:[{t:"Uzun vadeli, stratejik projeler",type:"I"},{t:"Hızlı, dinamik, kısa döngülü işler",type:"R"},{t:"Düzenli, öngörülebilir, sistemli işler",type:"C"}]},
+            {q:"Satış ekibi için yeni bir pitch hazırlanıyor. Nasıl katkı sağlarsın?",options:[{t:"Pitch storyline ve messaging",type:"E"},{t:"Müşteri segmentasyonu ve analiz",type:"I"},{t:"Pitch deck tasarımı",type:"A"}]},
+            {q:"Twin AI Companion'da bir bug var. Nasıl yaklaşırsın?",options:[{t:"Hemen kodu inceleyip düzeltmeye çalışırım",type:"I"},{t:"Bug'ın kullanıcıları nasıl etkilediğini anlarım",type:"S"},{t:"Bug tracking sistemine kaydeder, prioritize ederim",type:"C"}]},
+            {q:"Gönüllendirin kampanyası için yeni bir strateji gerekiyor. Ne yaparsın?",options:[{t:"Geçmiş verileri analiz edip insight çıkarırım",type:"I"},{t:"Yaratıcı bir kampanya konsepti tasarlarım",type:"A"},{t:"Kampanyayı adım adım planlarım",type:"C"}]},
+            {q:"Bir projede ekip içinde fikir ayrılığı var. Ne yaparsın?",options:[{t:"Herkesin görüşünü dinler, ortak zemini ararım",type:"S"},{t:"Verilere bakar, en mantıklı çözümü bulurum",type:"I"},{t:"Karar alır, ekibi yönlendiririm",type:"E"}]}
         ];
         
         const rankingQuestions = [
-            {q:"Bir YGA projesi için aşağıdaki görevleri sırala (1=En çok keyif alırım, 4=En az keyif alırım):",options:[{t:"Projenin teknik altyapısını kurmak",type:"R"},{t:"Projenin etkisini araştırmak ve analiz etmek",type:"I"},{t:"Proje için yaratıcı içerikler üretmek",type:"A"},{t:"Proje ekibini yönetmek ve koordine etmek",type:"E"}]}
+            {q:"Bir YGA projesi için aşağıdaki görevleri sırala (1=En çok keyif alırım, 4=En az keyif alırım):",options:[{t:"Projenin teknik altyapısını kurmak",type:"R"},{t:"Projenin etkisini araştırmak ve analiz etmek",type:"I"},{t:"Proje için yaratıcı içerikler üretmek",type:"A"},{t:"Proje ekibini yönetmek ve koordine etmek",type:"E"}]},
+            {q:"Bir bilim sahasında aşağıdaki aktiviteleri sırala:",options:[{t:"Setleri kurmak ve teknik hazırlıkları yapmak",type:"R"},{t:"Çocuklarla birebir ilgilenmek ve yardım etmek",type:"S"},{t:"Sahanın organizasyonunu ve lojistiğini yönetmek",type:"C"},{t:"Deneylerin bilimsel içeriğini geliştirmek",type:"I"}]},
+            {q:"Bir kampanya için aşağıdaki görevleri sırala:",options:[{t:"Kampanya görsellerini ve videolarını tasarlamak",type:"A"},{t:"Kampanyayı sosyal medyada yürütmek ve yönetmek",type:"E"},{t:"Kampanya metriklerini takip etmek ve raporlamak",type:"C"},{t:"Hedef kitle analizi ve strateji geliştirmek",type:"I"}]},
+            {q:"Twin için yeni bir özellik geliştiriliyor. Aşağıdaki rolleri sırala:",options:[{t:"Kod yazmak ve backend geliştirmek",type:"I"},{t:"Kullanıcı arayüzünü tasarlamak",type:"A"},{t:"Kullanıcılarla test yapıp feedback almak",type:"S"},{t:"Özelliği düzenli olarak test edip bug çıkarmak",type:"C"}]},
+            {q:"Bir toplantıda aşağıdaki rolleri sırala:",options:[{t:"Yaratıcı fikirler üretmek ve brainstorming yönetmek",type:"A"},{t:"Toplantıyı yönetmek ve kararları netleştirmek",type:"E"},{t:"Toplantı notlarını tutmak ve görevleri dağıtmak",type:"C"},{t:"Veri ve analiz sunmak",type:"I"}]},
+            {q:"Global Expansion için aşağıdaki görevleri sırala:",options:[{t:"Yeni ülkelerin pazar araştırmasını yapmak",type:"I"},{t:"Uluslararası ortaklarla görüşmeler yapmak",type:"E"},{t:"Expansion dokümanlarını ve planlarını hazırlamak",type:"C"},{t:"Expansion hikayesini anlatmak için içerik üretmek",type:"A"}]},
+            {q:"People & Culture için aşağıdaki aktiviteleri sırala:",options:[{t:"Gönüllülerle 1:1 görüşmeler yapıp onları dinlemek",type:"S"},{t:"Gönüllü memnuniyet anketleri ve analiz",type:"I"},{t:"Onboarding süreçlerini dokümante etmek",type:"C"},{t:"Team building aktiviteleri tasarlamak",type:"A"}]},
+            {q:"Sustainability projesinde aşağıdaki rolleri sırala:",options:[{t:"Çevresel etki ölçümlemesi ve raporlama",type:"I"},{t:"Sürdürülebilirlik kampanyaları tasarlamak",type:"A"},{t:"Sustainability paydaşlarıyla iş birliği kurmak",type:"E"},{t:"Sustainability metriklerini düzenli takip etmek",type:"C"}]},
+            {q:"Content üretimi için aşağıdaki formatları sırala:",options:[{t:"Yazılı içerik (blog, makale)",type:"I"},{t:"Video çekimi ve kurgusu",type:"A"},{t:"Sosyal medya community management",type:"S"},{t:"İçerik takvimleri ve planlama",type:"C"}]},
+            {q:"GSC için aşağıdaki görevleri sırala:",options:[{t:"Katılımcı ekiplere mentoring yapmak",type:"S"},{t:"Yarışma süreçlerini organize etmek",type:"C"},{t:"Projelerin teknik kalitesini değerlendirmek",type:"I"},{t:"Yarışmayı tanıtmak ve sponsorlarla görüşmek",type:"E"}]},
+            {q:"Satış sürecinde aşağıdaki rolleri sırala:",options:[{t:"Müşterilerle görüşmeler ve ikna",type:"E"},{t:"Satış verilerini analiz etmek",type:"I"},{t:"CRM sistemini yönetmek ve takip",type:"C"},{t:"Satış materyallerini tasarlamak",type:"A"}]},
+            {q:"Bir krizde (örn: son dakika değişiklikleri) aşağıdaki yaklaşımları sırala:",options:[{t:"Hızlıca pratik çözüm bulup uygulamak",type:"R"},{t:"Durumu analiz edip en iyi çözümü bulmak",type:"I"},{t:"Ekibin moralini yüksek tutmak",type:"S"},{t:"Krizi fırsata çevirmek için yaratıcı düşünmek",type:"A"}]}
         ];
         
-        // State
         let state = {
             stage: 'welcome',
             currentQ: 0,
@@ -622,7 +680,6 @@
             scores: {R:0,I:0,A:0,S:0,E:0,C:0}
         };
         
-        // Render fonksiyonları
         function renderWelcome() {
             return `
                 <div class="container">
@@ -657,11 +714,11 @@
                         
                         <div class="stats">
                             <div class="stat">
-                                <div class="stat-badge blue">5</div>
+                                <div class="stat-badge blue">66</div>
                                 <span>Soru</span>
                             </div>
                             <div class="stat">
-                                <div class="stat-badge purple">5</div>
+                                <div class="stat-badge purple">15</div>
                                 <span>Dakika</span>
                             </div>
                         </div>
@@ -683,7 +740,7 @@
                         <div class="progress-container">
                             <div class="progress-info">
                                 <span class="left">Soru ${state.currentQ + 1} / ${questions.length}</span>
-                                <span class="right">Seçim Soruları</span>
+                                <span class="right">Bölüm 1: Seçim Soruları</span>
                             </div>
                             <div class="progress-bar-bg">
                                 <div class="progress-bar" style="width: ${progress}%"></div>
@@ -717,7 +774,7 @@
                     <div class="card">
                         <div class="progress-container">
                             <div class="progress-info">
-                                <span class="left">Sıralama Soruları</span>
+                                <span class="left">Bölüm 2: Sıralama Soruları</span>
                                 <span class="right">Son Aşama</span>
                             </div>
                             <div class="progress-bar-bg">
@@ -726,7 +783,7 @@
                         </div>
                         
                         <h1>Son Aşama: Aktiviteleri Sırala</h1>
-                        <p class="subtitle">Aktiviteleri 1-4 arası sırala (1=En çok keyif alırım)</p>
+                        <p class="subtitle">Her soruda aktiviteleri 1-4 arası sırala<br>(1=En çok keyif alırım, 4=En az keyif alırım)</p>
                         
                         ${rankingQuestions.map((rq, qi) => `
                             <div class="ranking-container">
@@ -769,7 +826,8 @@
             
             const sorted = Object.entries(state.scores).sort((a,b) => b[1] - a[1]);
             const top3 = sorted.slice(0, 3);
-            const maxScore = 10;
+            const maxScore = 102;
+            const roles = getRoleRec();
             
             return `
                 <div class="container">
@@ -825,7 +883,7 @@
                         <div class="score-section">
                             <div class="section-title">⭐ Senin İçin En Uygun YGA Rolleri</div>
                             <div class="roles-list">
-                                ${['Bilim Seferberliği', 'Program Development', 'People & Culture'].map((role, i) => `
+                                ${roles.map((role, i) => `
                                     <div class="role-card">
                                         <div class="role-number">${i+1}</div>
                                         <div>
@@ -846,7 +904,7 @@
                                 </li>
                                 <li class="next-step">
                                     <svg class="arrow-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
-                                    <span>İlk projende <strong>Bilim Seferberliği</strong> alanını dene</span>
+                                    <span>İlk projende <strong>${roles[0]}</strong> alanını dene</span>
                                 </li>
                                 <li class="next-step">
                                     <svg class="arrow-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
@@ -861,7 +919,6 @@
             `;
         }
         
-        // Event handlers
         function startTest() {
             state.stage = 'test';
             render();
@@ -880,71 +937,103 @@
             }, 200);
         }
         
-        function prevQuestion() {
-            if (state.currentQ > 0) {
-                state.currentQ--;
-                render();
-            }
-        }
-        
-        function selectRank(qi, oi, rank) {
-            if (!state.rankings[qi]) state.rankings[qi] = {};
-            state.rankings[qi][oi] = rank;
+        function prevQuestion() {if (state.currentQ > 0) {
+            state.currentQ--;
             render();
         }
-        
-        function checkRankingComplete() {
-            return rankingQuestions.every((_, qi) => {
-                const r = state.rankings[qi];
-                if (!r) return false;
-                const vals = Object.values(r);
-                return vals.length === 4 && new Set(vals).size === 4 && vals.every(v => v >= 1 && v <= 4);
-            });
-        }
-        
-        function calculateResults() {
-            // Forced choice scoring
-            Object.values(state.answers).forEach(type => {
-                state.scores[type]++;
-            });
-            
-            // Ranking scoring
-            Object.entries(state.rankings).forEach(([qi, ranks]) => {
-                const rq = rankingQuestions[parseInt(qi)];
-                Object.entries(ranks).forEach(([oi, rank]) => {
-                    const opt = rq.options[parseInt(oi)];
-                    state.scores[opt.type] += (5 - rank);
-                });
-            });
-            
-            state.stage = 'results';
-            render();
-        }
-        
-        function restart() {
-            state = {
-                stage: 'welcome',
-                currentQ: 0,
-                answers: {},
-                rankings: {},
-                scores: {R:0,I:0,A:0,S:0,E:0,C:0}
-            };
-            render();
-        }
-        
-        // Main render
-        function render() {
-            let html = '';
-            if (state.stage === 'welcome') html = renderWelcome();
-            else if (state.stage === 'test') html = renderTest();
-            else if (state.stage === 'ranking') html = renderRanking();
-            else if (state.stage === 'results') html = renderResults();
-            
-            document.getElementById('app').innerHTML = html;
-        }
-        
-        // Initialize
+    }
+    
+    function selectRank(qi, oi, rank) {
+        if (!state.rankings[qi]) state.rankings[qi] = {};
+        state.rankings[qi][oi] = rank;
         render();
-    </script>
-</body>
-</html>
+    }
+    
+    function checkRankingComplete() {
+        return rankingQuestions.every((_, qi) => {
+            const r = state.rankings[qi];
+            if (!r) return false;
+            const vals = Object.values(r);
+            return vals.length === 4 && new Set(vals).size === 4 && vals.every(v => v >= 1 && v <= 4);
+        });
+    }
+    
+    function calculateResults() {
+        Object.values(state.answers).forEach(type => {
+            state.scores[type]++;
+        });
+        
+        Object.entries(state.rankings).forEach(([qi, ranks]) => {
+            const rq = rankingQuestions[parseInt(qi)];
+            Object.entries(ranks).forEach(([oi, rank]) => {
+                const opt = rq.options[parseInt(oi)];
+                state.scores[opt.type] += (5 - rank);
+            });
+        });
+        
+        state.stage = 'results';
+        render();
+    }
+    
+    function getRoleRec() {
+        const sorted = Object.entries(state.scores).sort((a,b) => b[1] - a[1]);
+        const p = sorted[0][0];
+        const s = sorted[1][0];
+        const map = {
+            SI:['Bilim Seferberliği','Program Development','People & Culture'],
+            IS:['Bilim Seferberliği','Program Development','Product'],
+            IA:['Product','Technology','Content'],
+            AI:['Product','Content','Technology'],
+            EA:['Gönüllendirin (Marketing)','Global Expansion','Content'],
+            AE:['Gönüllendirin (Marketing)','Content','Global Expansion'],
+            ES:['People & Culture','Global Expansion','GSC'],
+            SE:['People & Culture','Bilim Seferberliği','GSC'],
+            EI:['Global Expansion','Satış','GSC'],
+            IE:['Product','Global Expansion','Sustainability'],
+            IC:['Technology','Product','Sustainability'],
+            CI:['Technology','Product','Program Development'],
+            SC:['People & Culture','Bilim Seferberliği','Program Development'],
+            CS:['People & Culture','Program Development','Content'],
+            EC:['Global Expansion','Satış','GSC'],
+            CE:['Product','Program Development','Technology'],
+            RI:['Technology','Bilim Seferberliği','Product'],
+            IR:['Technology','Product','Sustainability'],
+            RA:['Content','Technology','Bilim Seferberliği'],
+            AR:['Content','Product','Technology'],
+            RS:['Bilim Seferberliği','Technology','Program Development'],
+            SR:['Bilim Seferberliği','People & Culture','Program Development'],
+            RC:['Technology','Product','Bilim Seferberliği'],
+            CR:['Technology','Product','Program Development'],
+            RE:['Satış','Global Expansion','Technology'],
+            ER:['Global Expansion','Satış','GSC'],
+            AS:['Content','People & Culture','Gönüllendirin'],
+            SA:['People & Culture','Content','Bilim Seferberliği'],
+            AC:['Content','Product','Gönüllendirin'],
+            CA:['Content','Product','Technology']
+        };
+        return map[p+s] || ['Product','Program Development','Content'];
+    }
+    
+    function restart() {
+        state = {
+            stage: 'welcome',
+            currentQ: 0,
+            answers: {},
+            rankings: {},
+            scores: {R:0,I:0,A:0,S:0,E:0,C:0}
+        };
+        render();
+    }
+    
+    function render() {
+        let html = '';
+        if (state.stage === 'welcome') html = renderWelcome();
+        else if (state.stage === 'test') html = renderTest();
+        else if (state.stage === 'ranking') html = renderRanking();
+        else if (state.stage === 'results') html = renderResults();
+        
+        document.getElementById('app').innerHTML = html;
+    }
+    
+    render();
+</script>
